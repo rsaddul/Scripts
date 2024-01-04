@@ -1,0 +1,4 @@
+# License your Windows device using the Orignal Product key
+
+wmic path softwarelicensingservice get OA3xOriginalProductKey
+slmgr /ipk NQCXV-GTMRF-H4P2X-X83CC-VFT4M

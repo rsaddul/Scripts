@@ -1,0 +1,1 @@
+robocopy "\\glf-dan-file01\danusers2$\Staff\A.Bullock" "\\glf-spr-file01\sprusers$\Staff\A.Bullock" /e /copyall /r:1 /w:3
