@@ -1,0 +1,2 @@
+copy /y GLF InfoApp.lnk "%programdata%\Microsoft\Windows\Start Menu\Programs\Startup\GLF InfoApp.ink"
+pause

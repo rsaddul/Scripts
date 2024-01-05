@@ -1,0 +1,17 @@
+Make shared folder on windows and add your pi image into the folder then map it in Oracle via Shared Folders.
+
+Add yourself to Ubuntu Virtualbox User permissions. (This will allow you to access your shared folder) 
+Open Terminal and run sudo adduser yourusername vboxsf
+If you dont know your username you can type whoami in Terminal
+
+Open Terminal in Ubuntu and browse to your shared folder i.e cd /media/sf_PiShrink-master/pi
+apply the following permissions to the script in your public folder   chmod +x pishrink.sh
+
+the following command will overwrite your current img into the shrinked size and should expand partitons on boot
+sudo ./pishrink.sh Rhys_Pi_Kodi_18_Leia_2020.img 
+
+the following command will make a copy of your img and work off that
+sudo ./pishrink.sh currentimagefile.img [newimgagefile.img]
+
+If you need to download the script you can use the following command in terminal (dont forget to apply permission to your script- see above)
+wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh

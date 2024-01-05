@@ -1,0 +1,1 @@
+\\resource.uc\netlogon\Scripts\DelProf\DelProf2.exe /i /u /d:5

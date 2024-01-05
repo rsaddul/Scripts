@@ -1,0 +1,65 @@
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceHealthScripts",
+    "@odata.count": 3,
+    "value": [
+        {
+            "id": "02a4e7e8-195a-4824-8044-08b3a7f2d555",
+            "publisher": "Microsoft",
+            "version": "5",
+            "displayName": "Restart stopped Office C2R svc",
+            "description": "If service is stopped, try to start it. If not auto-start, change to automatic.Important since Win32 OPP won’t launch if C2R isn’t running.",
+            "detectionScriptContent": "",
+            "remediationScriptContent": "",
+            "createdDateTime": "0001-01-01T00:00:00Z",
+            "lastModifiedDateTime": "0001-01-01T00:00:00Z",
+            "runAsAccount": "system",
+            "enforceSignatureCheck": false,
+            "runAs32Bit": true,
+            "roleScopeTagIds": [],
+            "isGlobalScript": true,
+            "highestAvailableVersion": null,
+            "detectionScriptParameters": [],
+            "remediationScriptParameters": []
+        },
+        {
+            "id": "61dcf0ae-580d-4620-8b9a-8ce678ecc5ee",
+            "publisher": "Microsoft",
+            "version": "3",
+            "displayName": "Update stale Group Policies",
+            "description": "If GP refresh was > 7 days ago, then gpupdate. IT can customize the 7 day threshold. Important for reducing network-related helpdesk calls, since many network certs and configurations are delivered via GP.",
+            "detectionScriptContent": "",
+            "remediationScriptContent": "",
+            "createdDateTime": "0001-01-01T00:00:00Z",
+            "lastModifiedDateTime": "0001-01-01T00:00:00Z",
+            "runAsAccount": "system",
+            "enforceSignatureCheck": false,
+            "runAs32Bit": true,
+            "roleScopeTagIds": [],
+            "isGlobalScript": true,
+            "highestAvailableVersion": null,
+            "detectionScriptParameters": [],
+            "remediationScriptParameters": []
+        },
+        {
+            "id": "de7f9525-e110-4616-982f-c4c51604e785",
+            "publisher": "Rhys Saddul",
+            "version": "1",
+            "displayName": "LeanLAPS",
+            "description": "https://gitlab.com/Lieben/assortedFunctions/-/blob/master/leanLAPS/leanLAPS.ps1",
+            "detectionScriptContent": "",
+            "remediationScriptContent": "",
+            "createdDateTime": "2022-08-16T15:44:20.6339009Z",
+            "lastModifiedDateTime": "2022-08-16T15:44:20.6339009Z",
+            "runAsAccount": "system",
+            "enforceSignatureCheck": false,
+            "runAs32Bit": false,
+            "roleScopeTagIds": [
+                "0"
+            ],
+            "isGlobalScript": false,
+            "highestAvailableVersion": null,
+            "detectionScriptParameters": [],
+            "remediationScriptParameters": []
+        }
+    ]
+}

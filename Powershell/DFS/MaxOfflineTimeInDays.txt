@@ -1,0 +1,8 @@
+Run the the below on CMD on the server: This will check MaxOfflineTimeInDays
+wmic.exe /namespace:\\root\microsoftdfs path DfsrMachineConfig get MaxOfflineTimeInDays
+
+Run the the below on CMD on the server: This will set the MaxOfflineTimeInDays
+wmic.exe /namespace:\\root\microsoftdfs path DfsrMachineConfig set MaxOfflineTimeInDays=60
+
+Remember to default this back to 60 in one weeks time
+

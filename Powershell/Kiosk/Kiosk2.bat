@@ -1,0 +1,1 @@
+start msedge.exe --kiosk https://koha.hcuc.ac.uk --edge-kiosk-type=fullscreen

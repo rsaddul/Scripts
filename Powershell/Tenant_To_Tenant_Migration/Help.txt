@@ -1,0 +1,23 @@
+Application (client) ID
+05734c24-7d71-4487-9603-92e5c6aef316
+
+Mint Migration Secret Key
+Password:   p5C8Q~p5X1.nwIb5s_ZWEg8ZUOAY729cutr62cGV
+
+Eduthing Tenant ID - Target
+9abfd72a-18ef-4aaf-8553-b839c681ead9
+
+Mint Tenant ID - Source
+dc2c8fb7-fa7e-426c-8125-7db33ea30c66
+
+
+Mint to Eduthing Migration Security Group
+MintToEduthingMigration@mint-group.co.uk
+#
+
+
+
+https://learn.microsoft.com/en-us/microsoft-365/enterprise/cross-tenant-mailbox-migration?view=o365-worldwide
+https://learn.microsoft.com/en-us/powershell/module/exchange/remove-migrationendpoint?view=exchange-ps
+https://learn.microsoft.com/en-us/exchange/sharing/organization-relationships/remove-an-organization-relationship#use-exchange-online-PowerShell-to-remove-an-organization-relationship
+https://www.youtube.com/watch?v=8VuE3KOWEu4&t=581s

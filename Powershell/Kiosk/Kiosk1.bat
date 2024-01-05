@@ -1,0 +1,1 @@
+start msedge.exe --kiosk https://prospectsoccupations.optimus-edonline.co.uk --edge-kiosk-type=fullscreen

@@ -1,0 +1,9 @@
+wmic diskdrive list brief
+
+cd C:\Program Files\Oracle\VirtualBox
+
+
+.\VBoxManage.exe internalcommands createrawvmdk -filename C:\sdcard.vmdk -rawdisk \\.\PHYSICALDRIVE2
+
+
+.\VBoxManage.exe internalcommands createrawvmdk -filename "C:\Users\rhyss\VirtualBox VMs\Re-Size\sdcard.vmdk" -rawdisk \\.\PHYSICALDRIVE2        (re-size)

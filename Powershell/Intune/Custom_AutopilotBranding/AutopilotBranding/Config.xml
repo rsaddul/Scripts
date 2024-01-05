@@ -1,0 +1,107 @@
+<Config>
+  <TimeZone>GMT Standard Time</TimeZone>
+  <RemoveApps>
+# default Windows 10 apps
+    <App>Microsoft.3DBuilder</App>
+    <App>Microsoft.Appconnector</App>
+    <App>Microsoft.BingFinance</App>
+    <App>Microsoft.BingNews</App>
+    <App>Microsoft.BingSports</App>
+    <App>Microsoft.Getstarted</App>
+    <App>Microsoft.Messaging</App>
+    <App>Microsoft.Microsoft3DViewer</App>
+    <App>Microsoft.MicrosoftSolitaireCollection</App>
+    <App>Microsoft.MinecraftUWP</App>
+    <App>Microsoft.MixedReality.Portal</App>
+    <App>Microsoft.People</App>
+    <App>Microsoft.Skypeapp</App>
+    <App>Microsoft.WindowsAlarms</App>
+    <App>Microsoft.windowscommunicationsapps</App>
+    <App>Microsoft.WindowsPhone</App>
+    <App>Microsoft.WindowsSoundRecorder</App>
+    <App>Microsoft.XboxApp</App>
+    <App>*xbox*</App>
+    <App>Microsoft.YourPhone</App>
+
+# Threshold 2 apps
+    <App>Microsoft.ConnectivityStore</App>
+    <App>Microsoft.OneConnect</App>
+    <App>Microsoft.WindowsFeedbackHub</App>
+
+# Redstone apps
+    <App>Microsoft.BingFoodAndDrink</App>
+    <App>Microsoft.BingHealthAndFitness</App>
+    <App>Microsoft.BingTravel</App>
+    <App>Microsoft.WindowsReadingList</App>
+
+# non-Microsoft
+    <App>2FE3CB00.PicsArt-PhotoStudio</App>
+    <App>4DF9E0F8.Netflix</App>
+    <App>6Wunderkinder.Wunderlist</App>
+    <App>9E2F88E3.Twitter</App>
+    <App>A278AB0D.MarchofEmpires</App>
+    <App>AdobeSystemIncorporated.AdobePhotoshop</App>
+    <App>ClearChannelRadioDigital.iHeartRadio</App>
+    <App>D52A8D61.FarmVille2CountryEscape</App>
+    <App>DB6EA5DB.CyberLinkMediaSuiteEssentials</App>
+    <App>Drawboard.DrawboardPDF</App>
+    <App>Facebook.Facebook</App>
+    <App>flaregamesGmbH.RoyalRevolt2</App>
+    <App>Flipboard.Flipboard</App>
+    <App>GAMELOFTSA.Asphalt8Airborne</App>
+    <App>KeeperSecurityInc.Keeper</App>
+    <App>king.com.*</App>
+    <App>king.com.CandyCrushSaga</App>
+    <App>king.com.CandyCrushSodaSaga</App>
+    <App>PandoraMediaInc.29680B314EFC2</App>
+    <App>Playtika.CaesarsSlotsFreeCasino</App>
+    <App>ShazamEntertainmentLtd.Shazam</App>
+    <App>TheNewYorkTimes.NYTCrossword</App>
+    <App>ThumbmunkeysLtd.PhototasticCollage</App>
+    <App>TuneIn.TuneInRadio</App>
+    <App>*windowsmaps*</App>
+
+# apps which cannot be removed using Remove-AppxPackage
+    <App>Microsoft.BioEnrollment</App>
+    <App>Microsoft.WindowsFeedback</App>
+    <App>Microsoft.Xbox.TCUI</App>
+    <App>Microsoft.XboxGameCallableUI</App>
+    <App>Microsoft.XboxGameOverlay</App>
+    <App>Microsoft.XboxGamingOverlay</App>
+    <App>Microsoft.XboxIdentityProvider</App>
+    <App>Microsoft.XboxSpeechToTextOverlay</App>
+    <App>Microsoft.Windows.ContactSupport</App>
+   #"Microsoft.Windows.Cortana
+  </RemoveApps>
+  <OneDriveSetup>https://go.microsoft.com/fwlink/?linkid=844652</OneDriveSetup>
+ <AddFeatures>
+    <!-- If you do add a language pack, make sure you add these language add-ons for each one.
+    <Feature>Language.Basic~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.Fonts.PanEuropeanSupplementalFonts~~~~0.0.1.0</Feature>
+    <Feature>Language.Handwriting~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.OCR~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.Speech~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.TextToSpeech~~~es-ES~0.0.1.0</Feature>
+    -->
+    <Feature>Language.Basic~~~en-GB~0.0.1.0</Feature>
+    <Feature>Language.Fonts.PanEuropeanSupplementalFonts~~~~0.0.1.0</Feature>
+    <Feature>Language.Handwriting~~~en-GB~0.0.1.0</Feature>
+    <Feature>Language.OCR~~~en-GB~0.0.1.0</Feature>
+    <Feature>Language.Speech~~~en-GB~0.0.1.0</Feature>
+    <Feature>Language.TextToSpeech~~~en-GB~0.0.1.0</Feature>
+    <Feature>NetFX3~~~~</Feature>
+  </AddFeatures>
+  <Language>Language.xml</Language>
+  <!-- If you want to set a language, customize and reference this file: <Language>Language.xml</Language> -->
+  <DefaultApps>Associations.xml</DefaultApps>
+  <RegisteredOwner>Autopilot User</RegisteredOwner>
+  <RegisteredOrganization>HRUC</RegisteredOrganization>
+  <OEMInfo>
+    <Manufacturer>Contoso</Manufacturer>
+    <Model>PC</Model>
+    <Logo>Contoso.bmp</Logo>
+    <SupportPhone>01895 853 443</SupportPhone>
+    <SupportHours>8am-5:30pm GMT</SupportHours>
+    <SupportURL>https://ithelpdesk.hcuc.ac.uk</SupportURL>
+  </OEMInfo>
+</Config>
