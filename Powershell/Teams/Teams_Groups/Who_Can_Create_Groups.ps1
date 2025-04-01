@@ -1,39 +1,25 @@
 ﻿# Developed by Rhys Saddul
 
-# Install-module AzureADPreview
+# https://learn.microsoft.com/en-us/microsoft-365/solutions/manage-creation-of-groups?view=o365-worldwide#step-2-run-powershell-commands
+# Install-Module Microsoft.Graph.Beta.Identity.DirectoryManagement
+# Install-Module Module Microsoft.Graph.Beta.Groups
 
-# This will find the GroupCreationAllowedGroupId and the Group Name which is allowed to create teams groups
+Import-Module Microsoft.Graph.Beta.Identity.DirectoryManagement
+Import-Module Microsoft.Graph.Beta.Groups
 
-# Connect to AzureAD
-Connect-AzureAD | Out-Null
+# Connect-MgGraph -Scopes "Directory.ReadWrite.All", "Group.Read.All", "Group.ReadWrite.All"
 
-# Find the Group.Unified directory setting
-$settingsObject = Get-AzureADDirectorySetting | Where-Object { $_.Displayname -eq "Group.Unified" }
+$setting = Get-MgBetaDirectorySetting | Where-Object -Property DisplayName -EQ "Group.Unified"
 
-# Check if the setting exists
-if ($settingsObject -eq $null) {
-    Write-Host "Group.Unified directory setting not found."
+if ($setting -eq $null) {
+    Write-Host "GroupCreationAllowedGroupId not found" -ForegroundColor Red
 } else {
-    # Display the current GroupCreationAllowedGroupId
-    $currentGroupId = $settingsObject.Values | Where-Object { $_.Name -eq "GroupCreationAllowedGroupId" } | Select-Object -ExpandProperty Value
+    $groupId = $setting.Values | Where-Object {$_.Name -eq "GroupCreationAllowedGroupId"} | Select-Object -ExpandProperty Value
 
-    if ($currentGroupId -eq $null) {
-        Write-Host "GroupCreationAllowedGroupId is not currently set."
+    if (![string]::IsNullOrEmpty($groupId)) {
+        $group = Get-MgBetaGroup -GroupId $groupId
+        Write-Host "Group name: $($group.DisplayName)" -ForegroundColor Green
     } else {
-        try {
-            # Get the group based on the object ID
-            $group = Get-AzureADGroup -ObjectId $currentGroupId
-
-            if ($group -eq $null) {
-                Write-Host "Group with ID $currentGroupId not found."
-            } else {
-                Write-Host "Current GroupCreationAllowedGroupId: $currentGroupId" -ForegroundColor Green
-                Write-Host "Group Name: $($group.DisplayName)" -ForegroundColor Green
-            }
-        } catch {
-            Write-Host "Group does not exist" -ForegroundColor Red
-        }
+        Write-Host "GroupCreationAllowedGroupId is not set in the policy." -ForegroundColor Yellow
     }
 }
-
-Disconnect-AzureAD | Out-Null
