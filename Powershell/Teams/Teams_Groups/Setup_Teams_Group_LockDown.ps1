@@ -1,45 +1,52 @@
-﻿# Developed by https://learn.microsoft.com/en-us/microsoft-365/solutions/manage-creation-of-groups?view=o365-worldwide
+# https://learn.microsoft.com/en-us/microsoft-365/solutions/manage-creation-of-groups?view=o365-worldwide#step-2-run-powershell-commands
+# Install-Module Microsoft.Graph.Beta.Identity.DirectoryManagement
+# Install-Module Module Microsoft.Graph.Beta.Groups
 
-#  This script is used to setup a security group to have access to create Teams Groups
+Import-Module Microsoft.Graph.Beta.Identity.DirectoryManagement
+Import-Module Microsoft.Graph.Beta.Groups
 
-# Install-module AzureADPreview
+Connect-MgGraph -Scopes "Directory.ReadWrite.All", "Group.Read.All"
 
-# Connect to Azure Active Directory
-Connect-AzureAD
+# Replace <GroupName> with the name of the group that you created. For example:
+$GroupName = "SG BUR Teams Group Creation"
 
-# Specify the name of the security group and whether group creation is allowed
-$GroupName = "Teams Group Creation"
 $AllowGroupCreation = "False"
+$settingsObjectID = (Get-MgBetaDirectorySetting | Where-object -Property Displayname -Value "Group.Unified" -EQ).id
 
-# Connect to Azure AD again (not necessary if already connected)
-
-# Retrieve the ID of the directory setting for Unified Groups
-$settingsObjectID = (Get-AzureADDirectorySetting | Where-object -Property Displayname -Value "Group.Unified" -EQ).id
-
-# Check if the directory setting exists, create it if not
-if (!$settingsObjectID) {
-    $template = Get-AzureADDirectorySettingTemplate | Where-object { $_.displayname -eq "group.unified" }
-    $settingsCopy = $template.CreateDirectorySetting()
-    New-AzureADDirectorySetting -DirectorySetting $settingsCopy
-    $settingsObjectID = (Get-AzureADDirectorySetting | Where-object -Property Displayname -Value "Group.Unified" -EQ).id
+if(!$settingsObjectID)
+{
+    $params = @{
+	  templateId = "62375ab9-6b52-47ed-826b-58e47e0e304b"
+	  values = @(
+		    @{
+			       name = "EnableMSStandardBlockedWords"
+			       value = $true
+		     }
+	 	     )
+	     }
+	
+    New-MgBetaDirectorySetting -BodyParameter $params
+	
+    $settingsObjectID = (Get-MgBetaDirectorySetting | Where-object -Property Displayname -Value "Group.Unified" -EQ).Id
 }
 
-# Retrieve the existing directory setting
-$settingsCopy = Get-AzureADDirectorySetting -Id $settingsObjectID
+ 
+$groupId = (Get-MgBetaGroup | Where-object {$_.displayname -eq $GroupName}).Id
 
-# Set the value for EnableGroupCreation
-$settingsCopy["EnableGroupCreation"] = $AllowGroupCreation
-
-# If $GroupName is provided, set the GroupCreationAllowedGroupId to the object ID of the specified group
-if ($GroupName) {
-    $settingsCopy["GroupCreationAllowedGroupId"] = (Get-AzureADGroup -SearchString $GroupName).objectid
-} else {
-    # If $GroupName is not provided, set the GroupCreationAllowedGroupId to the specified value
-    $settingsCopy["GroupCreationAllowedGroupId"] = $GroupName
+$params = @{
+	templateId = "62375ab9-6b52-47ed-826b-58e47e0e304b"
+	values = @(
+		@{
+			name = "EnableGroupCreation"
+			value = $AllowGroupCreation
+		}
+		@{
+			name = "GroupCreationAllowedGroupId"
+			value = $groupId
+		}
+	)
 }
 
-# Update the directory setting
-Set-AzureADDirectorySetting -Id $settingsObjectID -DirectorySetting $settingsCopy
+Update-MgBetaDirectorySetting -DirectorySettingId $settingsObjectID -BodyParameter $params
 
-# Display the values of the updated directory setting
-(Get-AzureADDirectorySetting -Id $settingsObjectID).Values
+(Get-MgBetaDirectorySetting -DirectorySettingId $settingsObjectID).Values
