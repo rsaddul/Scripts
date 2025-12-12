@@ -1,37 +1,49 @@
-﻿# Define the Azure AD group
-$GroupName = "HRUC H-CloudSec - Hybird Object ClearUp (HCUC)"
+<#
+Developed by: Rhys Saddul
+#>
 
-# Get the Azure AD group
-$Group = Get-AzureADGroup -Filter "DisplayName eq '$GroupName'"
+$GroupId = "cd62b772-56ba-4cc6-a4a3-1b57572ed282"
+$CsvPath = "C:\Users\RhysSaddul\OneDrive - eduthing\Desktop\Exports\Duplicate_ObjectIDs.csv"
 
-# Check if the group exists
-if ($Group) {
-    # Get the members of the group
-    $Members = Get-AzureADGroupMember -ObjectId $Group.ObjectId
+# ==========================
+# Connect to Microsoft Graph
+# ==========================
+Connect-MgGraph -Scopes "Group.Read.All", "Device.Read.All"
 
-    # Initialize an array to store the object IDs and device names
-    $Results = @()
+# ==========================
+# Get the Group (by ID)
+# ==========================
+try {
+    $Group = Get-MgGroup -GroupId $GroupId
+}
+catch {
+    Write-Host "Azure AD group '$GroupId' not found."
+    return
+}
 
-    # Loop through the members and retrieve their object IDs and device names
-    foreach ($Member in $Members) {
-        $ObjectId = $Member.ObjectId
+# ==========================
+# Get Group Members
+# ==========================
+$Members = Get-MgGroupMemberAsDevice -GroupId $Group.Id -All
 
-        # Check if the member is a device
-        if ($Member.ObjectType -eq "Device") {
-            $Device = Get-AzureADDevice -ObjectId $ObjectId
-            $DeviceName = $Device.DisplayName
+# ==========================
+# Process Device Members
+# ==========================
+$Results = foreach ($Device in $Members) {
 
-            # Add the object ID and device name to the result array
-            $Results += [PSCustomObject]@{
-                ObjectId   = $ObjectId
-                DeviceName = $DeviceName
-            }
-        }
+    [PSCustomObject]@{
+        ObjectId   = $Device.Id
+        DeviceName = $Device.DisplayName
     }
+}
 
-    # Output the result to a CSV file
-    $Results | Export-Csv -Path "C:\Duplicate_ObjectIDs.csv" -NoTypeInformation
+# ==========================
+# Export to CSV
+# ==========================
+if ($Results) {
+    $Results | Export-Csv -Path $CsvPath -NoTypeInformation
+    Write-Host "Export complete: $CsvPath"
 }
 else {
-    Write-Host "Azure AD group '$GroupName' not found."
+    Write-Host "No device objects found in the group."
 }
